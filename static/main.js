@@ -73,7 +73,7 @@ function renderQuestion(questions){
         </header>
         <p>${element.answer}</p>
         `
-        
+
         questionList.append(questionItem)
     });
-}
+}        
