@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat GPT - Python</title>
+    <!--Boostrap-->
+    <link rel="stylesheet" href="https://bootswatch.com/5/yeti/bootstrap.min.css">
+
+</head>
+<body class="bg-light text-black">
+    <div class = "container mt-3">
+        <h1><center>OpenAI Chat with more models</center></h1>
+        <h2 class="text-center mb-3">OpenAI Chat con Python</h2>
+        <form id = "userForm" class = "d-flex row g-3" >
+            <label for="inputpreguntas" class="form-label">Pregunta</label>
+            <input type="text" class="form-control col-md-6" id="question">
+            
+            <label for="inputmodelos" class="form-label">Modelos</label>
+            <select id="model" class="form-select col-md-4">
+                <option selected>Selecciona el modelo a usar</option>
+                <option value="gpt-4">gpt-4</option>
+                <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+                <option value="text-davinci-003">text-davinci-003</option>
+                <option value="code-davinci-edit-001">code-davinci-edit-001</option>
+            </select>
+            
+            <button class="btn btn-primary">Enviar</button>
+        </form>
+
+        <ul id = "questionList" class = "list-group"></ul>
+
+        <!--
+        <form id= "userForm" class = "d-flex row g-3">
+            <div class="col-md-6">
+                <label for="inputpreguntas" class="form-label">Pregunta</label>
+                <input type="text" class="form-control" id="question">
+            </div>
+            <div class="col-md-4">
+                <label for="inputmodelos" class="form-label">Modelos</label>
+                <select id="model" class="form-select">
+                    <option selected>Selecciona el modelo a usar</option>
+                    <option value="gpt-4">gpt-4</option>
+                    <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+                    <option value="text-davinci-003">text-davinci-003</option>
+                    <option value="code-davinci-edit-001">code-davinci-edit-001</option>
+                </select>
+            </div>
+            <div class="col-md-2 pt-4">
+                <button class="btn btn-primary" type="submit">Enviar</button>
+            </div>
+        </form>
+        
+        <div class="card overflow-auto pt-4 py-3" style="height: 450px">
+            <ul id = "questionlist" class = "list-group">
+                <li class="list-group-item"></li>
+            </ul>
+        </div>
+        -->
+    </div>
+    
+
+    <script src="/static/main.js"></script>
+</body>
+</html>
