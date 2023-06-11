@@ -2,13 +2,13 @@ const userForm = document.querySelector('#userForm')
 
 let questions = []
 
-/* Adding an event listener to the `window` object that listens for the `DOMContentLoaded`
+/* This code is adding an event listener to the `window` object that listens for the `DOMContentLoaded`
 event, which is fired when the initial HTML document has been completely loaded and parsed. When
-this event is triggered, the code sends a GET request to the `/api/questions` endpoint using the
-`fetch` API, and then waits for the response to be returned as JSON data. Once the data is received,
-it is stored in the `questions` array and passed as an argument to the `renderQuestion` function,
-which renders the data on the frontend. */
-
+this event is triggered, the code sends a GET request to the `/api/questions` endpoint to retrieve a
+list of questions from the server. Once the response is received, the data is extracted from the
+response using the `json()` method, and the resulting array of questions is stored in the
+`questions` variable. Finally, the `renderQuestion()` function is called with the `questions` array
+as an argument to display the list of questions on the web page. */
 window.addEventListener('DOMContentLoaded', async ()=>{
     const response = await fetch('/api/questions');
     const data = await response.json()
@@ -16,14 +16,15 @@ window.addEventListener('DOMContentLoaded', async ()=>{
     renderQuestion(questions)
 });
 
-/* Adding an event listener to the `userForm` element that listens for the `submit` event.
-When the form is submitted, the function is executed, which prevents the default form submission
+/* This code is adding an event listener to the `userForm` element that listens for the `submit` event.
+When the form is submitted, the function is triggered and it prevents the default form submission
 behavior using `e.preventDefault()`. It then retrieves the values of the `question` and `model`
-input fields from the form, and sends a POST request to the `/api/questions` endpoint using the
-`fetch` API. The request includes the `question` and `model` values in the request body as a JSON
-string. Once the response is received, it is converted to JSON format using `response.json()`, and
-the `userForm` is reset to its initial state. */
-
+input fields from the form, and sends a POST request to the `/api/questions` endpoint with the
+question and model data in the request body. Once the response is received, the data is extracted
+from the response using the `json()` method, and the resulting question object is added to the
+beginning of the `questions` array using the `unshift()` method. Finally, the `renderQuestion()`
+function is called with the updated `questions` array as an argument to display the new question on
+the web page, and the form is reset using `userForm.reset()`. */
 userForm.addEventListener('submit', async e => {
     e.preventDefault()
 
@@ -50,10 +51,12 @@ userForm.addEventListener('submit', async e => {
 })
 
 
+
 /**
- * The function renders a list of questions with their corresponding models and answers on a web page.
- * @param questions - an array of objects representing questions, where each object has the following
- * properties:
+ * The function renders a list of questions with a delete button for each question and handles the
+ * deletion of a question when the delete button is clicked.
+ * @param questions - an array of objects representing questions, where each object has the properties
+ * "id", "question", and "answer".
  */
 function renderQuestion(questions){
     const questionList = document.querySelector('#questionList');
