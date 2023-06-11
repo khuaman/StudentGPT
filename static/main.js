@@ -56,24 +56,40 @@ userForm.addEventListener('submit', async e => {
  * properties:
  */
 function renderQuestion(questions){
-    const questionList = document.querySelector('#questionList')
-    questionList.innerHTML = ''
+    const questionList = document.querySelector('#questionList');
+    questionList.innerHTML = '';
 
-    questions.forEach(element => {
+    questions.forEach((question) => {
         const questionItem = document.createElement('li')
-        questionItem.classList = 'list-group-item list-group-item-dark my-2'
-        //<button>edit</button>
+        questionItem.classList = 'list-group-item list-group-item-dark my-2';
 
         questionItem.innerHTML = `
         <header class= "d-flex justify-content-between aling-items-center">
-            <h3>${'pregunta: ' + element.question}</h3>
+            <h3>${'pregunta: ' + question.question}</h3>
             <div> 
-                <buttom class= 'bnt-delete btn btn-danger btn-sm'>delete</button>
+                <buttom data-id="${question.id}" class= 'bnt-delete btn btn-danger btn-sm'>delete</button>
             </div>
         </header>
-        <p>${element.answer}</p>
-        `
+        <p>${question.answer}</p>
+        `;
 
-        questionList.append(questionItem)
+        // Handle delete button
+        const btnDelete = questionItem.querySelector('.bnt-delete');
+
+        btnDelete.addEventListener('click', async ()=>{
+            const response = await fetch(`/api/questions/${question.id}`, {
+                method: 'DELETE',
+            });
+
+            const data = await response.json();
+
+            questions = questions.filter((question) => question.id !== data.id);
+
+            renderQuestion(questions);
+
+        });
+
+        questionList.appendChild(questionItem);
+
     });
 }        

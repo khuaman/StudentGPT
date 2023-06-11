@@ -81,17 +81,18 @@ def delete_question(id):
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=extras.RealDictCursor)
 
-    cur.execute('DELETE FROM questions WHERE id = %s RETURNING *', (id))
-    delete_question = cur.fetchone()
+    cur.execute('DELETE FROM questions WHERE id = %s RETURNING *', (id, ))
+    question = cur.fetchone()
 
     conn.commit()
-    conn.close()
-    cur.close()
 
-    if delete_question is None:
+    cur.close()
+    conn.close()
+
+    if question is None:
         return jsonify({'message' : 'Question not found'}), 404
     
-    return jsonify(delete_question)
+    return jsonify(question)
 
 
 @app.get('/api/questions/<id>')
@@ -100,7 +101,7 @@ def get_questions_by_id(id):
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=extras.RealDictCursor)
 
-    cur.execute('SELECT * FROM questions WHERE id = %s', (id))
+    cur.execute('SELECT * FROM questions WHERE id = %s', (id, ))
     question = cur.fetchone()
 
     #Validando por si no existe el registro
