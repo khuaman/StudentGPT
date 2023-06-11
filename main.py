@@ -76,7 +76,7 @@ def create_questions():
     return jsonify(new_create_question)
 
 
-@app.delete('/api/questions')
+@app.delete('/api/questions/<id>')
 def delete_question(id):
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=extras.RealDictCursor)
